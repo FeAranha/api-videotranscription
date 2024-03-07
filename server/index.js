@@ -10,6 +10,7 @@ app.get('/audio', async (req, res) => {
 
   try {
     await downloader(videoId)
+
     res.send('ok')
   } catch (error) {
     console.log(error)
