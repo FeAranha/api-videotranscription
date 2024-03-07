@@ -22,29 +22,26 @@ export const downloader = async (videoId) => {
     const title = await getVideoTitle(videoId);
     console.log('Video title:', title);
 
-    let outputPath = path.join('/home/fe/devs/nodeJS/api-videoTranscription/download', `${title}.mp4`);
+    const outputPath = path.join('/home/fe/devs/nodeJS/api-videoTranscription/download', `${title}.mp3`);
 
-    let counter = 1;
-    while (fs.existsSync(outputPath)) {
-      outputPath = path.join('/home/fe/devs/nodeJS/api-videoTranscription/download', `${title} (${counter}).mp4`);
-      counter++;
-    }
-
-    ytdl(videoURL, {
+    const audioStream = ytdl(videoURL, {
       quality: 'lowestaudio',
       filter: 'audioonly',
-    })
-      .on('end', () => {
-        console.log('done_download');
+      format: 'mp3',
+    });
+
+    audioStream
+      .pipe(fs.createWriteStream(outputPath))
+      .on('finish', () => {
+        console.log('Download completo:', outputPath);
       })
       .on('error', (error) => {
-        console.error('Error download:', error);
-        throw new Error('Error downloading video');
-      })
-      .pipe(fs.createWriteStream(outputPath));
+        console.error('Erro durante o download:', error);
+        throw new Error('Erro durante o download do vídeo');
+      });
 
   } catch (error) {
-    console.error('Error:', error);
+    console.error('Erro:', error);
     throw error;
   }
 };
