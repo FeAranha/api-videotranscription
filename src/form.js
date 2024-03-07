@@ -3,7 +3,7 @@ import { loadVideo } from "./youtube-api";
 
 const form = document.querySelector('#form')
 
-form.addEventListener('submit', (event) => {
+form.addEventListener('submit', async (event) => {
   event.preventDefault()
 
   try {
@@ -12,7 +12,7 @@ form.addEventListener('submit', (event) => {
 
     const formData = new FormData(form)
     const url = formData.get('url')
-    loadVideo(url)
+    await loadVideo(url)
 
   } catch (err) {
     console.log('[SUBMIT_ERROR]', err)
