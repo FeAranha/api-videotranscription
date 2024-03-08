@@ -1,6 +1,7 @@
 import axios from "axios";
 import { startLoading, stopLoading, loadingMessage } from "./loading";
 import { loadVideo, getVideoId } from "./youtube-api";
+import { transcribeAudio } from "./transcribe";
 
 const form = document.querySelector('#form')
 
@@ -17,6 +18,9 @@ form.addEventListener('submit', async (event) => {
 
     loadingMessage('Connecting API')
     await axios.get('http://localhost:3333/audio?v=' + getVideoId(url))
+
+    const data = await transcribeAudio()
+    console.log('Data=> ', data)
 
     location.reload()
 
