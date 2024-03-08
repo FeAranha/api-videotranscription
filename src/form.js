@@ -16,13 +16,13 @@ form.addEventListener('submit', async (event) => {
     const url = formData.get('url')
     await loadVideo(url)
 
-    loadingMessage('Connecting API')
-    await axios.get('http://localhost:3333/audio?v=' + getVideoId(url))
+    //loadingMessage('Connecting API')
+    //await axios.get('http://localhost:3333/audio?v=' + getVideoId(url))
 
     const data = await transcribeAudio()
     console.log('Data=> ', data)
 
-    location.reload()
+    //location.reload()
 
   } catch (err) {
     console.log('[SUBMIT_ERROR]', err)
