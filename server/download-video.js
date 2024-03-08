@@ -1,6 +1,5 @@
 import ytdl from 'ytdl-core';
 import fs from 'fs';
-import path from 'path';
 
 const getVideoTitle = async (videoId) => {
   try {
@@ -22,18 +21,15 @@ export const downloader = async (videoId) => {
     const title = await getVideoTitle(videoId);
     console.log('Video title:', title);
 
-    const outputPath = path.join('/home/fe/devs/nodeJS/api-videoTranscription/download', `${title}.mp3`);
-
     const audioStream = ytdl(videoURL, {
       quality: 'lowestaudio',
       filter: 'audioonly',
-      format: 'mp3',
     });
 
     audioStream
-      .pipe(fs.createWriteStream(outputPath))
+      .pipe(fs.createWriteStream('audio.mp4'))
       .on('finish', () => {
-        console.log('Download completo:', outputPath);
+        console.log('Download completo:');
       })
       .on('error', (error) => {
         console.error('Erro durante o download:', error);
