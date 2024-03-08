@@ -17,6 +17,7 @@ export const createMP3 = () => new Promise((resolve, reject) => {
 
     .on('end', () => {
       console.log('FFmpeg has finished.');
+      resolve()
     })
 
     .on('error', (error) => {
