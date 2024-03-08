@@ -10,7 +10,7 @@ window.YTPlayer = null
 
 export function getVideoId(url) {
   const [part1, part2] = url.split('?v=')
-  const [videoId, other] = part2.split("&")
+  const [videoId] = part2.split("&")
 
   return videoId
 }

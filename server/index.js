@@ -13,11 +13,11 @@ app.get('/audio', async (req, res) => {
     await downloader(videoId)
     await createMP3()
 
-    res.send('ok')
+    return res.send('ok')
   } catch (error) {
     console.log(error)
 
-    res.send(error)
+    return res.send(error)
   }
 })
 
