@@ -1,8 +1,8 @@
-import axios from "axios";
-import { startLoading, stopLoading, loadingMessage } from "./loading";
-import { loadVideo, getVideoId } from "./youtube-api";
-import { transcribeAudio } from "./transcribe";
-import { renderText } from "./render";
+import axios from "axios"
+import { startLoading, stopLoading, loadingMessage } from "./loading.js"
+import { loadVideo, getVideoId } from "./youtube-api.js"
+import { transcribeAudio } from "./transcribe.js"
+import { renderText } from "./render.js"
 
 const form = document.querySelector('#form')
 
@@ -17,12 +17,11 @@ form.addEventListener('submit', async (event) => {
     const url = formData.get('url')
     await loadVideo(url)
 
-    //loadingMessage('Connecting API')
-    //await axios.get('http://localhost:3333/audio?v=' + getVideoId(url))
+    loadingMessage('Connecting API')
+    await axios.get('http://localhost:3333/audio?v=' + getVideoId(url))
 
     const data = await transcribeAudio()
     renderText(data)
-    //location.reload()
 
   } catch (err) {
     console.log('[SUBMIT_ERROR]', err)

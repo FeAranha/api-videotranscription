@@ -13,12 +13,12 @@ export const createMP3 = () => new Promise((resolve, reject) => {
     .saveToFile('audio.mp3')
 
     .on('end', () => {
-      console.log('FFmpeg has finished.');
+      console.log('FFmpeg has finished.')
       resolve()
     })
 
     .on('error', (error) => {
       console.error(error)
       reject(error)
-    });
+    })
 })
