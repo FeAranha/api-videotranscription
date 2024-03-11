@@ -27,7 +27,7 @@ export const downloader = async (videoId) => {
     });
 
     audioStream
-      .pipe(fs.createWriteStream('audio.mp4'))
+      .pipe(fs.createWriteStream(`download/${title}.mp4`))
       .on('finish', () => {
         console.log('Download completo:');
       })
